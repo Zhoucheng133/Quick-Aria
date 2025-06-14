@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt"
@@ -21,6 +22,18 @@ func NoAccount(c *fiber.Ctx) error {
 		"ok":  true,
 		"msg": count == 0,
 	})
+}
+
+// 生成JWT
+func GenerateJWT(username string) (string, error) {
+	claims := jwt.MapClaims{
+		"username": username,
+		"exp":      time.Now().Add(365 * 24 * time.Hour).Unix(),
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenString, err := token.SignedString(JwtKey)
+	return tokenString, err
 }
 
 // 验证JWT
