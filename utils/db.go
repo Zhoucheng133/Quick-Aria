@@ -1,10 +1,36 @@
 package utils
 
-import "database/sql"
+import (
+	"database/sql"
 
-func InitDB(db *sql.DB) {
-	initUser(db)
-	initAria(db)
+	gonanoid "github.com/matoous/go-nanoid/v2"
+)
+
+var Db *sql.DB
+var JwtKey []byte
+
+func InitKey() {
+	// 初始化JWT密钥
+	id, err := gonanoid.New()
+	if err != nil {
+		panic(err)
+	}
+	JwtKey = []byte(id)
+	// 测试代码，生产模式下注释下一行
+	JwtKey = []byte("quick_aria")
+}
+
+func InitDB() {
+
+	// 初始化数据库
+	var err error
+	Db, err = sql.Open("sqlite3", "./db/data.db")
+	if err != nil {
+		panic(err)
+	}
+	// defer Db.Close()
+	initUser(Db)
+	initAria(Db)
 }
 
 func initUser(db *sql.DB) {
