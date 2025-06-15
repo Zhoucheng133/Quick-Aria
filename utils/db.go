@@ -29,29 +29,16 @@ func InitDB() {
 		panic(err)
 	}
 	// defer Db.Close()
-	initUser(Db)
-	initAria(Db)
+	sqlInit(Db)
 }
 
-func initUser(db *sql.DB) {
+func sqlInit(db *sql.DB) {
 	query := `
 	CREATE TABLE IF NOT EXISTS user (
 		id TEXT PRIMARY KEY,
-		username TEXT,
-		password TEXT
-    )
-	`
-	_, err := db.Exec(query)
-	if err != nil {
-		panic(err)
-	}
-}
-
-func initAria(db *sql.DB) {
-	query := `
-	CREATE TABLE IF NOT EXISTS aria (
-		id TEXT PRIMARY KEY,
-		link TEXT,
+		name TEXT,
+		password TEXT,
+		aria TEXT,
 		secret TEXT
     )
 	`

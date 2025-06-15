@@ -41,6 +41,18 @@ func main() {
 	app.Get("/api/noaccount", func(c *fiber.Ctx) error {
 		return utils.NoAccount(c)
 	})
+	app.Post("/api/login", func(c *fiber.Ctx) error {
+		return utils.Login(c)
+	})
+	app.Post("/api/register", func(c *fiber.Ctx) error {
+		return utils.Register(c)
+	})
+	app.Get("/api/test", func(c *fiber.Ctx) error {
+		return c.JSON(utils.Response{
+			Ok:  true,
+			Msg: "Hello World!!!!",
+		})
+	})
 
 	app.Listen(":3000")
 }
