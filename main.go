@@ -7,6 +7,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func Middleware(c *fiber.Ctx) error {
@@ -36,6 +37,11 @@ func main() {
 	utils.InitKey()
 
 	app := fiber.New()
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowHeaders: "*",
+		AllowMethods: "*",
+	}))
 
 	app.Use(Middleware)
 	app.Get("/api/noaccount", func(c *fiber.Ctx) error {
