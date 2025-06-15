@@ -16,3 +16,8 @@ type RegisterBody struct {
 	Aria     string `json:"aria"`
 	Secret   string `json:"secret"`
 }
+
+type AriaData struct {
+	Aria   string `json:"aria"`
+	Secret string `json:"secret"`
+}

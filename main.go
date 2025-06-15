@@ -53,6 +53,9 @@ func main() {
 			Msg: "Hello World!!!!",
 		})
 	})
+	app.Get("/api/get", func(c *fiber.Ctx) error {
+		return utils.GetAria(c)
+	})
 
 	app.Listen(":3000")
 }
