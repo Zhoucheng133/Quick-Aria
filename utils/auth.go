@@ -62,7 +62,7 @@ func TokenCheck(c *fiber.Ctx) error {
 		return JwtKey, nil
 	})
 	if err != nil || !token.Valid {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+		return c.JSON(fiber.Map{
 			"ok":  false,
 			"msg": "无效或过期的 token",
 		})
