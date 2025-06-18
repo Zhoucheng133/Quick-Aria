@@ -13,7 +13,7 @@ func GetAria(c *fiber.Ctx) error {
 		})
 	}
 	return c.JSON(Response{
-		Ok: false,
+		Ok: true,
 		Msg: fiber.Map{
 			"aria":   data.Aria,
 			"secret": data.Secret,
